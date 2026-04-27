@@ -1,25 +1,27 @@
-import { Link, useRouterState } from '@tanstack/react-router'
-import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { BriefcaseBusiness, Menu, X } from 'lucide-react'
+import { profile } from '@/data/profile'
 
 const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/resume', label: 'About' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/gallery', label: 'Gallery' },
-  { to: '/blog/', label: 'Blog' },
-  { to: '/contact', label: 'Contact' },
+  { href: '/', label: 'Home' },
+  { href: '/resume', label: 'Experience' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
 ]
 
-export default function Header() {
+type HeaderProps = {
+  currentPath: string
+}
+
+export default function Header({ currentPath }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const routerState = useRouterState()
-  const currentPath = routerState.location.pathname
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handler)
+    const handler = () => setScrolled(window.scrollY > 12)
+    handler()
+    window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
@@ -27,86 +29,61 @@ export default function Header() {
     setMobileOpen(false)
   }, [currentPath])
 
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/8 shadow-lg shadow-black/20'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform">
-              AM
-            </div>
-            <span className="font-semibold text-white hidden sm:block">Alex Morgan</span>
-          </Link>
+  const linkClass = (href: string) => {
+    const active = href === '/' ? currentPath === '/' : currentPath.startsWith(href)
+    return `nav-link ${active ? 'nav-link-active' : ''}`
+  }
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
+  return (
+    <header className={`site-header ${scrolled ? 'site-header-scrolled' : ''}`}>
+      <div className="site-shell">
+        <div className="header-row">
+          <a href="/" className="brand-lockup" aria-label={`${profile.name} home`}>
+            <span className="brand-mark">{profile.initials}</span>
+            <span>
+              <span className="brand-name">{profile.name}</span>
+              <span className="brand-role">{profile.role}</span>
+            </span>
+          </a>
+
+          <nav className="desktop-nav" aria-label="Primary navigation">
             {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  currentPath === link.to
-                    ? 'text-indigo-400 bg-indigo-500/10'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
-                }`}
-              >
+              <a key={link.href} href={link.href} className={linkClass(link.href)}>
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
-          {/* CTA + Mobile toggle */}
-          <div className="flex items-center gap-3">
-            <Link
-              to="/contact"
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-0.5"
-            >
-              Hire Me
-            </Link>
+          <div className="header-actions">
+            <a href="/consulting" className="consulting-link" title="Private consulting view">
+              <BriefcaseBusiness size={16} />
+              <span>Consulting</span>
+            </a>
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+              type="button"
+              className="mobile-menu-button"
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen((open) => !open)}
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-white/8">
-          <nav className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-1">
+        {mobileOpen && (
+          <nav className="mobile-nav" aria-label="Mobile navigation">
             {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  currentPath === link.to
-                    ? 'text-indigo-400 bg-indigo-500/10'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
-                }`}
-              >
+              <a key={link.href} href={link.href} className={linkClass(link.href)}>
                 {link.label}
-              </Link>
+              </a>
             ))}
-            <Link
-              to="/contact"
-              className="mt-2 px-4 py-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white text-sm font-semibold rounded-lg text-center"
-            >
-              Hire Me
-            </Link>
+            <a href="/consulting" className="mobile-consulting-link">
+              Consulting mode
+            </a>
           </nav>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   )
 }

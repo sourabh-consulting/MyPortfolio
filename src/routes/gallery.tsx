@@ -1,16 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
-
-export const Route = createFileRoute('/gallery')({
-  head: () => ({
-    meta: [
-      { title: 'Gallery — Alex Morgan' },
-      { name: 'description', content: 'Visual showcase of design work, UI screenshots, and project highlights by Alex Morgan.' },
-    ],
-  }),
-  component: GalleryPage,
-})
+import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react'
 
 const galleryImages = [
   { id: 1, src: 'https://picsum.photos/seed/port01/800/600', thumb: 'https://picsum.photos/seed/port01/400/300', alt: 'E-Commerce Dashboard UI', category: 'UI Design' },
@@ -29,25 +18,25 @@ const galleryImages = [
 
 const categories = ['All', 'UI Design', 'Web App', 'Mobile', 'Tools']
 
-function GalleryPage() {
+export function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const filtered = activeCategory === 'All'
     ? galleryImages
-    : galleryImages.filter((img) => img.category === activeCategory)
-
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index)
-    document.body.style.overflow = 'hidden'
-  }
+    : galleryImages.filter((image) => image.category === activeCategory)
 
   const closeLightbox = () => {
     setLightboxIndex(null)
     document.body.style.overflow = ''
   }
 
-  const prev = () => {
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index)
+    document.body.style.overflow = 'hidden'
+  }
+
+  const previous = () => {
     if (lightboxIndex === null) return
     setLightboxIndex((lightboxIndex - 1 + filtered.length) % filtered.length)
   }
@@ -58,109 +47,79 @@ function GalleryPage() {
   }
 
   return (
-    <div className="pt-24 pb-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section className="page-hero">
+      <div className="site-shell">
+        <p className="eyebrow">Gallery scaffold</p>
+        <h1>Visual placeholders remain for later replacement.</h1>
+        <p className="section-lede">
+          This gallery keeps the original structure available, but the images are still placeholder assets.
+        </p>
 
-        {/* Header */}
-        <div className="mb-14">
-          <p className="text-cyan-400 text-sm font-semibold uppercase tracking-widest mb-3">Visual Work</p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
-            Design <span className="gradient-text">Gallery</span>
-          </h1>
-          <p className="text-slate-400 text-lg max-w-xl">
-            Screenshots, UI designs, and visual explorations from projects I've worked on.
-          </p>
-        </div>
-
-        {/* Category filter */}
-        <div className="flex gap-2 flex-wrap mb-10">
-          {categories.map((cat) => (
+        <div className="filter-bar" aria-label="Gallery filters">
+          {categories.map((category) => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                activeCategory === cat
-                  ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/25'
-                  : 'bg-white/5 border border-white/8 text-slate-400 hover:text-white'
-              }`}
+              key={category}
+              type="button"
+              onClick={() => setActiveCategory(category)}
+              className={activeCategory === category ? 'filter-pill active' : 'filter-pill'}
             >
-              {cat}
+              {category}
             </button>
           ))}
         </div>
 
-        {/* Masonry grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        <div className="gallery-grid">
           {filtered.map((image, index) => (
-            <div
+            <button
               key={image.id}
-              className="break-inside-avoid group relative rounded-xl overflow-hidden cursor-zoom-in border border-white/8 hover:border-cyan-500/30 transition-all duration-300 hover:-translate-y-0.5"
+              type="button"
+              className="gallery-item"
               onClick={() => openLightbox(index)}
             >
-              <img
-                src={image.thumb}
-                alt={image.alt}
-                loading="lazy"
-                className="w-full block group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                <p className="text-white text-sm font-medium">{image.alt}</p>
-                <p className="text-cyan-400 text-xs mt-0.5">{image.category}</p>
-              </div>
-              <div className="absolute top-3 right-3 w-7 h-7 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <ZoomIn size={14} className="text-white" />
-              </div>
-            </div>
+              <img src={image.thumb} alt={image.alt} loading="lazy" />
+              <span>
+                <ZoomIn size={15} />
+                {image.category}
+              </span>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
       {lightboxIndex !== null && (
-        <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center"
-          onClick={closeLightbox}
-        >
-          {/* Close */}
-          <button
-            className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors z-10"
-            onClick={closeLightbox}
-          >
-            <X size={20} />
+        <div className="lightbox" role="dialog" aria-modal="true" onClick={closeLightbox}>
+          <button type="button" className="lightbox-close" onClick={closeLightbox} aria-label="Close image">
+            <X size={22} />
           </button>
-
-          {/* Prev */}
           <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors z-10"
-            onClick={(e) => { e.stopPropagation(); prev() }}
+            type="button"
+            className="lightbox-nav lightbox-prev"
+            onClick={(event) => {
+              event.stopPropagation()
+              previous()
+            }}
+            aria-label="Previous image"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={24} />
           </button>
-
-          {/* Image */}
-          <div className="max-w-4xl max-h-[85vh] px-16" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={filtered[lightboxIndex].src}
-              alt={filtered[lightboxIndex].alt}
-              className="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl"
-            />
-            <div className="text-center mt-4">
-              <p className="text-white font-medium">{filtered[lightboxIndex].alt}</p>
-              <p className="text-slate-500 text-sm mt-0.5">
-                {lightboxIndex + 1} / {filtered.length} · {filtered[lightboxIndex].category}
-              </p>
-            </div>
-          </div>
-
-          {/* Next */}
+          <img
+            src={filtered[lightboxIndex].src}
+            alt={filtered[lightboxIndex].alt}
+            onClick={(event) => event.stopPropagation()}
+          />
           <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors z-10"
-            onClick={(e) => { e.stopPropagation(); next() }}
+            type="button"
+            className="lightbox-nav lightbox-next"
+            onClick={(event) => {
+              event.stopPropagation()
+              next()
+            }}
+            aria-label="Next image"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={24} />
           </button>
         </div>
       )}
-    </div>
+    </section>
   )
 }

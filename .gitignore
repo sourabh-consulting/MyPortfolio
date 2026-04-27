@@ -8,6 +8,11 @@ build/
 .cache/
 .vite/
 .superpowers/
+.content-collections/
+.qa-screens/
+.dev-server.pid
+.dev-server-jobid
+.static-preview.cjs
 
 .env
 .env.*
