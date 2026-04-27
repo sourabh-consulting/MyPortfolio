@@ -12,6 +12,21 @@
   </head>
   <body>
     <div id="root"></div>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: none">
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <select name="project-type">
+        <option>Career conversation</option>
+        <option>AI architecture discussion</option>
+        <option>Conversational AI / bot work</option>
+        <option>MVP architecture support</option>
+        <option>Speaking / writing / collaboration</option>
+        <option>Other</option>
+      </select>
+      <textarea name="message"></textarea>
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

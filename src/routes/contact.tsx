@@ -23,7 +23,7 @@ export function ContactPage() {
     const formData = new FormData(form)
 
     try {
-      const response = await fetch('/contact.html', {
+      const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
