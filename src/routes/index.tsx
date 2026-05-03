@@ -105,7 +105,7 @@ export function HomePage() {
             <h2>Recruiter-safe by default. Consulting mode when intentionally shared.</h2>
             <p>
               The public portfolio stays focused on stable career positioning. A hidden consulting view is available
-              for AI workflow audits, bot modernization, and MVP architecture conversations.
+              for AI workflow audits, agentic AI readiness, and GenAI architecture conversations.
             </p>
           </div>
           <a href="/consulting" className="secondary-button">

@@ -1,5 +1,4 @@
 import {
-  Bot,
   BrainCircuit,
   BriefcaseBusiness,
   Cloud,
@@ -14,9 +13,9 @@ export const profile = {
   name: 'Sourabh Jain',
   initials: 'SJ',
   role: 'AI Systems Architect',
-  headline: 'I design practical AI systems that move from prototype to production.',
+  headline: 'I design production-ready GenAI systems and AI product architecture.',
   summary:
-    'Associate Architect and Conversational Bot Engineer at Quantiphi, focused on conversational AI, LLM systems, Google Cloud, and product-grade engineering delivery.',
+    'Associate Architect at Quantiphi repositioning toward GenAI architecture, agentic AI workflows, Google Cloud, LLM systems, and product-grade enterprise AI delivery.',
   location: 'Bengaluru, Karnataka, India',
   email: 'sourabh.consulting@gmail.com',
   github: 'https://github.com/sourabh-consulting',
@@ -32,27 +31,27 @@ export const proofPoints = [
 
 export const focusAreas = [
   {
-    title: 'Conversational AI Systems',
+    title: 'GenAI Product Architecture',
     description:
-      'Dialogflow CX, Vertex AI Search, chatbot modernization, and production bot delivery patterns.',
-    icon: Bot,
-  },
-  {
-    title: 'LLM Product Architecture',
-    description:
-      'Grounded assistant flows, retrieval-aware UX, human review loops, and practical GenAI system boundaries.',
+      'LLM application design, RAG patterns, evaluation loops, human review, and production boundaries.',
     icon: BrainCircuit,
   },
   {
-    title: 'Cloud-Native Delivery',
+    title: 'Agentic AI Workflows',
     description:
-      'Google Cloud architecture, deployment tradeoffs, operational reliability, and cost-aware design.',
+      'Tool use, workflow orchestration, task boundaries, failure handling, and governance for agent-style systems.',
+    icon: Sparkles,
+  },
+  {
+    title: 'Cloud-Native AI Delivery',
+    description:
+      'Google Cloud architecture, Vertex AI ecosystem awareness, deployment tradeoffs, reliability, and cost-aware design.',
     icon: Cloud,
   },
   {
-    title: 'Full-Stack Engineering',
+    title: 'Platform Engineering Foundations',
     description:
-      'React, TypeScript, REST APIs, backend integration, data modeling, and pragmatic implementation planning.',
+      'REST APIs, backend integration, data modeling, React/TypeScript, and pragmatic implementation planning.',
     icon: Code2,
   },
 ]
@@ -66,7 +65,7 @@ export const experience = [
         title: 'Associate Architect - Conversational Bot Engineer',
         dates: 'Apr 2025 - Present',
         summary:
-          'Architecting and delivering conversational AI systems with a focus on production readiness, cloud integration, and stakeholder-ready technical design.',
+          'Associate architect role with a current focus on enterprise delivery, technical design, stakeholder alignment, and rebuilding depth toward GenAI and AI architecture.',
       },
       {
         title: 'Senior Conversational Bot Engineer',
@@ -140,7 +139,8 @@ export const certifications = [
 ]
 
 export const skills = [
-  { label: 'Dialogflow CX', icon: Bot },
+  { label: 'GenAI architecture', icon: BrainCircuit },
+  { label: 'Agentic AI workflows', icon: Sparkles },
   { label: 'Vertex AI', icon: Sparkles },
   { label: 'Google Cloud', icon: Cloud },
   { label: 'LLM systems', icon: BrainCircuit },
@@ -153,29 +153,35 @@ export const skills = [
 export const consultingOffers = [
   {
     title: 'AI workflow audit',
+    price: 'Rs 75k-Rs 1.5L',
+    timeline: '1-2 weeks',
     description:
-      'Map an existing AI, bot, or automation workflow and identify reliability, cost, UX, and delivery risks.',
+      'Map an existing AI, bot, or automation workflow and identify reliability, cost, UX, governance, integration, and handoff risks.',
     icon: ShieldCheck,
   },
   {
-    title: 'Conversational bot modernization',
+    title: 'Agentic AI workflow readiness plan',
+    price: 'Rs 1.5L-Rs 4L',
+    timeline: '2-4 weeks',
     description:
-      'Plan upgrades for Dialogflow CX, Vertex AI Search, handoff flows, integrations, and analytics loops.',
-    icon: Bot,
+      'Assess whether an AI workflow should use agents, RAG, deterministic orchestration, human review, or a simpler automation path.',
+    icon: Sparkles,
   },
   {
-    title: 'MVP architecture support',
+    title: 'GenAI MVP architecture sprint',
+    price: 'Rs 2L-Rs 6L',
+    timeline: '2-5 weeks',
     description:
-      'Turn a rough AI product idea into a buildable architecture, implementation roadmap, and free-tier-aware stack.',
+      'Turn a rough AI product, copilot, assistant, or internal workflow idea into a buildable architecture and implementation roadmap.',
     icon: BriefcaseBusiness,
   },
 ]
 
 export const caseStudies = [
   {
-    label: 'Enterprise bot platform',
+    label: 'Enterprise AI assistant workflow',
     result:
-      'Public-safe pattern: structured intent flows, API-backed fulfillment, handoff design, and operational review loops.',
+      'Public-safe pattern: scoped assistant behavior, API-backed actions, handoff design, evaluation, and operational review loops.',
   },
   {
     label: 'Knowledge assistant workflow',
@@ -193,12 +199,12 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   '/': {
     title: 'Sourabh Jain - AI Systems Architect',
     description:
-      'AI systems architect focused on conversational AI, LLM systems, Google Cloud, and practical product engineering.',
+      'AI systems architect focused on GenAI architecture, LLM systems, Google Cloud, and practical product engineering.',
   },
   '/resume': {
     title: 'Experience - Sourabh Jain',
     description:
-      'Experience, education, certifications, and skills for Sourabh Jain, AI systems architect and conversational AI engineer.',
+      'Experience, education, certifications, and skills for Sourabh Jain, AI systems architect and GenAI architecture candidate.',
   },
   '/projects': {
     title: 'Projects - Sourabh Jain',
@@ -210,10 +216,10 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   },
   '/contact': {
     title: 'Contact - Sourabh Jain',
-    description: 'Contact Sourabh Jain for career, consulting, or technical collaboration conversations.',
+    description: 'Contact Sourabh Jain for career, AI architecture, or technical collaboration conversations.',
   },
   '/consulting': {
     title: 'Consulting - Sourabh Jain',
-    description: 'Private consulting view for AI workflow audits, bot modernization, and MVP architecture support.',
+    description: 'Private consulting view for AI workflow audits, agentic AI readiness, and GenAI MVP architecture support.',
   },
 }

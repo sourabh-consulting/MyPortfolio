@@ -10,8 +10,8 @@ export function ConsultingPage() {
             <p className="eyebrow">Hidden consulting mode</p>
             <h1>Focused AI architecture help without turning the public portfolio into a sales page.</h1>
             <p className="hero-lede">
-              This view is meant for direct links: AI workflow audits, conversational bot modernization, and MVP
-              architecture support for practical teams.
+              This view is meant for direct links: fixed-scope AI workflow audits, agentic AI readiness reviews, and
+              GenAI MVP architecture sprints for teams that need production judgment before they overbuild.
             </p>
             <div className="hero-actions">
               <a href="/contact" className="primary-button">
@@ -47,10 +47,11 @@ export function ConsultingPage() {
           </p>
         </div>
         <div className="site-shell focus-grid">
-          {consultingOffers.map(({ title, description, icon: Icon }) => (
+          {consultingOffers.map(({ title, price, timeline, description, icon: Icon }) => (
             <article key={title} className="info-card">
               <Icon size={22} />
               <h3>{title}</h3>
+              <p className="offer-meta">{price} - {timeline}</p>
               <p>{description}</p>
             </article>
           ))}

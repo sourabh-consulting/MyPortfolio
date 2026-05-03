@@ -470,6 +470,12 @@ main {
   margin: 16px 0 8px;
 }
 
+.offer-meta {
+  font-weight: 800;
+  color: var(--blue) !important;
+  margin-bottom: 10px !important;
+}
+
 .info-card p,
 .case-card p,
 .project-card p,
